@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - proxylines-network
+    ports:
+      - 5432:${DATABASE_PORT}
+
+networks:
+  proxylines-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
